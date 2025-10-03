@@ -11,21 +11,27 @@ public partial class EnemySpawner : Node
     WeightedDictionary<string, PackedScene> enemyTable = new WeightedDictionary<string, PackedScene>();
 
 
-    EnemySpawner(double baseSpawnTime, WeightedDictionary<string, PackedScene> enemytable)
+    public void SetEnemySpawner(WeightedDictionary<string, PackedScene> enemytable,double baseSpawnTime)
     {
         BaseSpawnTime = baseSpawnTime;
-        enemyTable = enemytable;
+        enemyTable = enemytable.Clone();
     }
+
+    
     public override void _Ready()
     {
+        Timer = new Timer();
+        Timer.WaitTime = BaseSpawnTime;
+        AddChild(Timer);
         Timer.Timeout += OnTimeOut;
+        Timer.Start();
     }
 
     public void OnTimeOut()
     {
         Timer.Start();
 
-        var enemyInstance = enemyTable.GetRandom().Instantiate<Node2D>();
+        var enemyInstance = enemyTable.GetRandom().Instantiate<BasicEnemy>();
         enemyInstance.GlobalPosition = GetSpawnPosition();
         GetTree().GetFirstNodeInGroup("Enemies").AddChild(enemyInstance);
 
@@ -46,4 +52,26 @@ public partial class EnemySpawner : Node
 
         return SpawnPosition;
     }
+    
+    public void AddEnemy(PackedScene enemy,float weight)
+    {
+        enemyTable.AddOrUpdate(enemy.Instantiate<BasicEnemy>().ID,enemy,weight);
+    }
+
+    public void RemoveEnemy(PackedScene enemy)
+    {
+        enemyTable.Remove(enemy.Instantiate<BasicEnemy>().ID);
+    }
+
+    public void SetSpawnTime(double time)
+    {
+        if(time <= 0.1)
+        {
+            return;
+        }
+        Timer.WaitTime = time;
+        Timer.Start();
+    }
+
+
 }

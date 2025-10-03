@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class EnemyManager : Node
 {
@@ -7,20 +8,24 @@ public partial class EnemyManager : Node
 
     [Export] public PackedScene Slime;
     [Export] public GameTimeManager GameTimeManager;
+    [Export] public PackedScene EnemySpawner;
+
+    
 
     WeightedDictionary<string,PackedScene> enemyTable = new WeightedDictionary<string,PackedScene>();
 
+    List<EnemySpawner> Spawners = new List<EnemySpawner>();
     public int SPAWNRADIUS = 500;
 
-    public Timer Timer;
-
-    public double BaseSpawnTime = 3;
 
     public override void _Ready()
     {
-        enemyTable.AddOrUpdate("Slime",Slime,20);
-        Timer = GetNode<Timer>("Timer");
-        Timer.Timeout += OnTimeOut;
+        
+        enemyTable.AddOrUpdate("slime",Slime,20);
+        EnemySpawner spawnerInstance = EnemySpawner.Instantiate<EnemySpawner>();
+        AddChild(spawnerInstance);
+        spawnerInstance.SetEnemySpawner(enemyTable,3);
+        Spawners.Add(spawnerInstance);
         GameTimeManager.DifficultUpdate += OnDifficultUpdate;
     }
 
@@ -39,23 +44,15 @@ public partial class EnemyManager : Node
         return SpawnPosition;
     }
 
-    public void OnTimeOut()
-    {
-        Timer.Start();
-
-        var enemyInstance = enemyTable.GetRandom().Instantiate<Node2D>();
-        enemyInstance.GlobalPosition = GetSpawnPosition();
-         GetTree().GetFirstNodeInGroup("Enemies").AddChild(enemyInstance);
-        
-
-    }
 
     public void OnDifficultUpdate(int currentDifficult)
     {
-        Timer.WaitTime = BaseSpawnTime - (float)currentDifficult * 0.1;
+        //Timer.WaitTime = BaseSpawnTime - (float)currentDifficult * 0.1;
+
+        Spawners[0].SetSpawnTime(Spawners[0].BaseSpawnTime - (float)currentDifficult * 0.1);
         if(currentDifficult >= 4)
         {
-            enemyTable.AddOrUpdate("Zombie",Zombie,10);
+            Spawners[0].AddEnemy(Zombie,10);
         }
     }
 }
