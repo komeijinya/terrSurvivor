@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqpelydineytf"]
+
+[ext_resource type="Script" uid="uid://bxr0ce5qmfksp" path="res://script/BasicEnemy.cs" id="1_3l3iv"]
+
+[node name="BasicEnemy" type="CharacterBody2D"]
+script = ExtResource("1_3l3iv")

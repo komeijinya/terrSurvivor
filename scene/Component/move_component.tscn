@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdcpk1rcvg2mc"]
+
+[ext_resource type="Script" uid="uid://v3pdi5jeui7f" path="res://scene/Component/MoveComponent.cs" id="1_0bgtw"]
+
+[node name="MoveComponent" type="Node"]
+script = ExtResource("1_0bgtw")

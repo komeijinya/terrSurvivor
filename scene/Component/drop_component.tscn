@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://djllbdtnd6ms6"]
+
+[ext_resource type="Script" uid="uid://beqbb7a3exloe" path="res://scene/Component/DropComponent.cs" id="1_wsw4b"]
+[ext_resource type="PackedScene" uid="uid://c3ya8myyqdggu" path="res://scene/game_object/Experience/experience.tscn" id="2_kvukd"]
+
+[node name="DropComponent" type="Node"]
+script = ExtResource("1_wsw4b")
+exp = ExtResource("2_kvukd")
+DropPercent = 1.0

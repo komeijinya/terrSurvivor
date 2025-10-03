@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3ya8myyqdggu"]
+
+[ext_resource type="Texture2D" uid="uid://cm6s2rusxxa36" path="res://scene/game_object/Experience/Item_291.png" id="1_f6vgp"]
+[ext_resource type="Script" uid="uid://bd8oqqfl0q13w" path="res://scene/game_object/Experience/Experience.cs" id="1_mlpuc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6vgp"]
+size = Vector2(12, 29)
+
+[node name="Experience" type="Node2D"]
+scale = Vector2(0.8, 0.8)
+script = ExtResource("1_mlpuc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_f6vgp")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_f6vgp")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ability_upgrade" load_steps=2 format=3 uid="uid://bu6qydx4leds2"]
+
+[ext_resource type="Script" uid="uid://bdaehv5eo7wma" path="res://upgrades/ability_upgrade.cs" id="1_f3wp5"]
+
+[resource]
+script = ExtResource("1_f3wp5")
+Id = "sword_upgrade"
+Name = "冷却(剑)"
+Description = "减少10%剑冷却"
+weight = 10.0
+MaxQuantity = 8

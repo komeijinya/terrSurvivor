@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ess10ukk1g46"]
+
+[ext_resource type="Script" uid="uid://d2m1oa3dohvbv" path="res://scene/manager/AbilityManager.cs" id="1_74hgf"]
+[ext_resource type="PackedScene" uid="uid://bdmrm6jleri3q" path="res://ui/upgrade_screen.tscn" id="2_c7x2f"]
+
+[node name="AbilityManager" type="Node"]
+script = ExtResource("1_74hgf")
+UpgradeScreen = ExtResource("2_c7x2f")

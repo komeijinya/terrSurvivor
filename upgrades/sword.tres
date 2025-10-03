@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://yflkcrbqcebu"]
+
+[ext_resource type="PackedScene" uid="uid://c5v3ayyjq6fkt" path="res://scene/ability/sword_ability.tscn" id="1_n0mxh"]
+[ext_resource type="Script" uid="uid://b34psak83vdo2" path="res://upgrades/Ability.cs" id="2_lyue8"]
+
+[resource]
+script = ExtResource("2_lyue8")
+AbilityManagerScene = ExtResource("1_n0mxh")
+Id = "sword"
+Name = "剑"
+Description = "周期性生成一把剑"
+weight = 10.0
+MaxQuantity = 1

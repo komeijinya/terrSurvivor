@@ -1,0 +1,88 @@
+[gd_scene load_steps=15 format=3 uid="uid://dinnu75hfwt0d"]
+
+[ext_resource type="Script" uid="uid://cwjm3xlg4vf65" path="res://scene/game_object/zombie/Zombie.cs" id="1_kg6v3"]
+[ext_resource type="PackedScene" uid="uid://djllbdtnd6ms6" path="res://scene/Component/drop_component.tscn" id="2_ghykm"]
+[ext_resource type="Texture2D" uid="uid://clb78oya7ido6" path="res://scene/game_object/zombie/NPC_3.png" id="2_tbf3l"]
+[ext_resource type="PackedScene" uid="uid://bdcpk1rcvg2mc" path="res://scene/Component/move_component.tscn" id="3_8kuf7"]
+[ext_resource type="PackedScene" uid="uid://cw565r0mi3cmo" path="res://scene/Component/health_component.tscn" id="4_8kuf7"]
+[ext_resource type="PackedScene" uid="uid://co2cwm6n13oph" path="res://scene/Component/hurt_box.tscn" id="4_tbf3l"]
+[ext_resource type="PackedScene" uid="uid://eknk2do5s685" path="res://scene/Component/hit_box.tscn" id="6_4vp6u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vp6u"]
+atlas = ExtResource("2_tbf3l")
+region = Rect2(0, 0, 38, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghykm"]
+atlas = ExtResource("2_tbf3l")
+region = Rect2(0, 48, 38, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muwsm"]
+atlas = ExtResource("2_tbf3l")
+region = Rect2(0, 96, 38, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vld4j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vp6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghykm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_muwsm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8kuf7"]
+size = Vector2(34, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghykm"]
+size = Vector2(21, 33)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4vp6u"]
+radius = 8.0
+
+[node name="Zombie" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 16
+collision_mask = 17
+script = ExtResource("1_kg6v3")
+ID = "zombie"
+MaxHealth = 50.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vld4j")
+autoplay = "default"
+frame_progress = 0.241731
+
+[node name="DropComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("2_ghykm")]
+healthComponent = NodePath("../HealthComponent")
+
+[node name="MoveComponent" parent="." instance=ExtResource("3_8kuf7")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_8kuf7")]
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("HealthComponent", "moveComponent") instance=ExtResource("4_tbf3l")]
+visible = false
+collision_layer = 16
+collision_mask = 4
+HealthComponent = NodePath("../HealthComponent")
+isKnockable = true
+moveComponent = NodePath("../MoveComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(-2, -1.5)
+shape = SubResource("RectangleShape2D_8kuf7")
+
+[node name="HitBox" parent="." instance=ExtResource("6_4vp6u")]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_ghykm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4vp6u")

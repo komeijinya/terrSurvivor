@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ability_upgrade" load_steps=2 format=3 uid="uid://cduwgq387vrle"]
+
+[ext_resource type="Script" uid="uid://bdaehv5eo7wma" path="res://upgrades/ability_upgrade.cs" id="1_se3lf"]
+
+[resource]
+script = ExtResource("1_se3lf")
+Id = "knife_upgrade"
+Name = "冷却(飞刀)"
+Description = "减少15%飞刀冷却"
+weight = 10.0
+MaxQuantity = 6

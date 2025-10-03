@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5v3ayyjq6fkt"]
+
+[ext_resource type="Script" uid="uid://hmr1flom6co6" path="res://scene/ability/SwordAbility.cs" id="1_xox0s"]
+[ext_resource type="PackedScene" uid="uid://bk2yh5quqvtsh" path="res://scene/game_object/sword/sword.tscn" id="2_pb6lv"]
+
+[node name="SwordAbility" type="Node2D"]
+script = ExtResource("1_xox0s")
+Sword = ExtResource("2_pb6lv")
+ID = "Sword"
+BaseCD = 2.0
+BaseDamage = 20.0
+
+[node name="Timer" type="Timer" parent="."]

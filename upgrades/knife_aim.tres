@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ability_upgrade" load_steps=2 format=3 uid="uid://3heq7kuxrx3w"]
+
+[ext_resource type="Script" uid="uid://bdaehv5eo7wma" path="res://upgrades/ability_upgrade.cs" id="1_dopxt"]
+
+[resource]
+script = ExtResource("1_dopxt")
+Id = "knife_aim"
+Name = "瞄准升级"
+Description = "将飞刀的瞄准方式改为自动瞄准最近的敌人"
+weight = 10.0
+MaxQuantity = 1
+IsExclusion = true
+ExclusionID = "knife_double"

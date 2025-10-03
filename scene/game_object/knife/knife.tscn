@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://juov6sebtons"]
+
+[ext_resource type="Script" uid="uid://b6asl0xmiqrvr" path="res://scene/game_object/knife/Knife.cs" id="1_3fv8x"]
+[ext_resource type="Texture2D" uid="uid://ccrmtqfau65cp" path="res://scene/game_object/knife/Item_279.png" id="1_7fams"]
+[ext_resource type="PackedScene" uid="uid://eknk2do5s685" path="res://scene/Component/hit_box.tscn" id="2_krsi5"]
+[ext_resource type="PackedScene" uid="uid://bdcpk1rcvg2mc" path="res://scene/Component/move_component.tscn" id="4_6lmhp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxnp8"]
+size = Vector2(24, 11)
+
+[node name="Knife" type="CharacterBody2D"]
+scale = Vector2(1.2, 1.2)
+script = ExtResource("1_3fv8x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_7fams")
+
+[node name="HitBox" parent="." instance=ExtResource("2_krsi5")]
+collision_layer = 4
+collision_mask = 16
+KnockBackStrength = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_uxnp8")
+
+[node name="MoveComponent" parent="." instance=ExtResource("4_6lmhp")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true

@@ -1,0 +1,166 @@
+[gd_scene load_steps=17 format=3 uid="uid://yhkmg3srvb1w"]
+
+[ext_resource type="Shader" uid="uid://d2faiyakkfe1o" path="res://scene/game_object/slime/slime.gdshader" id="1_b84jw"]
+[ext_resource type="Script" uid="uid://bcx7nxwrt5c2j" path="res://scene/game_object/slime/Slime.cs" id="1_q61bw"]
+[ext_resource type="PackedScene" uid="uid://cw565r0mi3cmo" path="res://scene/Component/health_component.tscn" id="2_f2cmt"]
+[ext_resource type="Texture2D" uid="uid://btgtgqc6shtxh" path="res://scene/game_object/slime/NPC_1.png" id="2_gmvvp"]
+[ext_resource type="PackedScene" uid="uid://bdcpk1rcvg2mc" path="res://scene/Component/move_component.tscn" id="3_kpory"]
+[ext_resource type="PackedScene" uid="uid://djllbdtnd6ms6" path="res://scene/Component/drop_component.tscn" id="4_f2cmt"]
+[ext_resource type="PackedScene" uid="uid://co2cwm6n13oph" path="res://scene/Component/hurt_box.tscn" id="6_iylds"]
+
+[sub_resource type="Animation" id="Animation_kpory"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("JumpNode:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("JumpNode:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_f2cmt"]
+resource_name = "walk"
+length = 1.4
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"SetIsMoving"
+}, {
+"args": [false],
+"method": &"SetIsMoving"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("JumpNode:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.533333, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -20), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("JumpNode:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.533333, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 0.8), Vector2(0.8, 1), Vector2(1, 0.8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iylds"]
+_data = {
+&"RESET": SubResource("Animation_kpory"),
+&"walk": SubResource("Animation_f2cmt")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_757lr"]
+shader = ExtResource("1_b84jw")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b60eg"]
+atlas = ExtResource("2_gmvvp")
+region = Rect2(0, 0, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2cmt"]
+atlas = ExtResource("2_gmvvp")
+region = Rect2(0, 26, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpory"]
+atlas = ExtResource("2_gmvvp")
+region = Rect2(0, 26, 32, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q61bw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b60eg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2cmt")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpory")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q61bw"]
+radius = 17.0294
+
+[node name="Slime" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_q61bw")
+ID = "slime"
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_f2cmt")]
+
+[node name="MoveComponent" parent="." instance=ExtResource("3_kpory")]
+MaxSpeed = 600.0
+acceleration = 250.0
+
+[node name="DropComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("4_f2cmt")]
+healthComponent = NodePath("../HealthComponent")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_iylds")
+}
+autoplay = "walk"
+
+[node name="JumpNode" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="JumpNode"]
+material = SubResource("ShaderMaterial_757lr")
+sprite_frames = SubResource("SpriteFrames_q61bw")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.895995
+
+[node name="HurtBox" parent="JumpNode" node_paths=PackedStringArray("HealthComponent", "moveComponent") instance=ExtResource("6_iylds")]
+collision_layer = 16
+collision_mask = 4
+HealthComponent = NodePath("../../HealthComponent")
+isKnockable = true
+moveComponent = NodePath("../../MoveComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpNode/HurtBox"]
+shape = SubResource("CircleShape2D_q61bw")

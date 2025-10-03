@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://6ossckrchouk"]
+
+[ext_resource type="Script" uid="uid://333ufnb3ib3c" path="res://scene/manager/GameTimeManager.cs" id="1_80ksi"]
+
+[node name="GameTimeManager" type="Node"]
+script = ExtResource("1_80ksi")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1200.0
+autostart = true

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ability_upgrade" load_steps=2 format=3 uid="uid://dugj02h3q6kwn"]
+
+[ext_resource type="Script" uid="uid://bdaehv5eo7wma" path="res://upgrades/ability_upgrade.cs" id="1_adnh4"]
+
+[resource]
+script = ExtResource("1_adnh4")
+Id = "knife_double"
+Name = "双重射击"
+Description = "一次性射出两发飞刀"
+weight = 10.0
+MaxQuantity = 1
+IsExclusion = true
+ExclusionID = "knife_aim"

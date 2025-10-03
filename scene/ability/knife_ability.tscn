@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c04nm2upxaq3"]
+
+[ext_resource type="Script" uid="uid://cjbjpx8cqpcj2" path="res://scene/ability/KnifeAbility.cs" id="1_hs7m2"]
+[ext_resource type="PackedScene" uid="uid://juov6sebtons" path="res://scene/game_object/knife/knife.tscn" id="2_1djd6"]
+
+[node name="KnifeAbility" type="Node2D"]
+script = ExtResource("1_hs7m2")
+Knife = ExtResource("2_1djd6")
+ID = "Knife"
+BaseCD = 1.0
+BaseDamage = 7.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
