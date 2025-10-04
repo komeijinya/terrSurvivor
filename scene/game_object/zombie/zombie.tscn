@@ -67,8 +67,6 @@ healthComponent = NodePath("../HealthComponent")
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("HealthComponent", "moveComponent") instance=ExtResource("4_tbf3l")]
 visible = false
-collision_layer = 16
-collision_mask = 4
 HealthComponent = NodePath("../HealthComponent")
 isKnockable = true
 moveComponent = NodePath("../MoveComponent")

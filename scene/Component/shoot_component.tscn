@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsas7lm6215qt"]
+
+[ext_resource type="Script" uid="uid://syyileos17nj" path="res://scene/Component/ShootComponent.cs" id="1_gt3d0"]
+
+[node name="ShootComponent" type="Node2D"]
+script = ExtResource("1_gt3d0")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

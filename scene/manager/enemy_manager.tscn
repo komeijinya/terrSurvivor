@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvbfteltpvf2f"]
+[gd_scene load_steps=6 format=3 uid="uid://cvbfteltpvf2f"]
 
 [ext_resource type="Script" uid="uid://cyphcrdxmcj7u" path="res://scene/manager/EnemyManager.cs" id="1_vlakn"]
 [ext_resource type="PackedScene" uid="uid://dinnu75hfwt0d" path="res://scene/game_object/zombie/zombie.tscn" id="2_lenjj"]
 [ext_resource type="PackedScene" uid="uid://yhkmg3srvb1w" path="res://scene/game_object/slime/slime.tscn" id="3_pmlfj"]
+[ext_resource type="PackedScene" uid="uid://rohlyxslhlrf" path="res://scene/game_object/skeleton_archer/skeleton_archer.tscn" id="4_6x0ek"]
 [ext_resource type="PackedScene" uid="uid://c2vtbf84lqdlh" path="res://scene/manager/enemy_spawner.tscn" id="4_o4viv"]
 
 [node name="EnemyManager" type="Node"]
 script = ExtResource("1_vlakn")
 Zombie = ExtResource("2_lenjj")
 Slime = ExtResource("3_pmlfj")
+SkeletonArcher = ExtResource("4_6x0ek")
 EnemySpawner = ExtResource("4_o4viv")
 
 [node name="Timer" type="Timer" parent="."]

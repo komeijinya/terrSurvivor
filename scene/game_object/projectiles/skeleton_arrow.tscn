@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://bl13tb3cksclw"]
+
+[ext_resource type="Script" uid="uid://3fl7diokm205" path="res://scene/game_object/projectiles/SkeletonArrow.cs" id="1_3b81o"]
+[ext_resource type="Texture2D" uid="uid://cxu8r53uywtw1" path="res://scene/game_object/projectiles/Projectile_117.png" id="2_u1w7f"]
+[ext_resource type="PackedScene" uid="uid://eknk2do5s685" path="res://scene/Component/hit_box.tscn" id="3_ctp3n"]
+[ext_resource type="PackedScene" uid="uid://bdcpk1rcvg2mc" path="res://scene/Component/move_component.tscn" id="4_h6tc8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twqfi"]
+size = Vector2(27, 15)
+
+[node name="SkeletonArrow" type="CharacterBody2D"]
+script = ExtResource("1_3b81o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_u1w7f")
+
+[node name="HitBox" parent="." instance=ExtResource("3_ctp3n")]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_twqfi")
+
+[node name="MoveComponent" parent="." instance=ExtResource("4_h6tc8")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true

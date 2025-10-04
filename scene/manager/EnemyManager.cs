@@ -7,6 +7,8 @@ public partial class EnemyManager : Node
     [Export] public PackedScene Zombie;
 
     [Export] public PackedScene Slime;
+
+    [Export] public PackedScene SkeletonArcher;
     [Export] public GameTimeManager GameTimeManager;
     [Export] public PackedScene EnemySpawner;
 
@@ -22,6 +24,7 @@ public partial class EnemyManager : Node
     {
         
         enemyTable.AddOrUpdate("slime",Slime,20);
+        enemyTable.AddOrUpdate(SkeletonArcher.Instantiate<BasicEnemy>().ID,SkeletonArcher,30);
         EnemySpawner spawnerInstance = EnemySpawner.Instantiate<EnemySpawner>();
         AddChild(spawnerInstance);
         spawnerInstance.SetEnemySpawner(enemyTable,3);
@@ -47,7 +50,6 @@ public partial class EnemyManager : Node
 
     public void OnDifficultUpdate(int currentDifficult)
     {
-        //Timer.WaitTime = BaseSpawnTime - (float)currentDifficult * 0.1;
 
         Spawners[0].SetSpawnTime(Spawners[0].BaseSpawnTime - (float)currentDifficult * 0.1);
         if(currentDifficult >= 4)

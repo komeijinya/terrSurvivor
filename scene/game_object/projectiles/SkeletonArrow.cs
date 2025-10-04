@@ -1,22 +1,16 @@
 using Godot;
 using System;
 
-public partial class Knife : CharacterBody2D
+public partial class SkeletonArrow : CharacterBody2D
 {
-	[Export] public float Speed = 600f;
-	[Export] public int Penetrate = 1;
-
-	public float acceleration = 50;
-
+	public Vector2 Direction = Vector2.Right;
 	public float Damage = 10;
 
-	public Vector2 Direction = Vector2.Right;
-
+	[Export] public float Speed = 600f;
+	public float acceleration = 50;
 	private MoveComponent MoveComponent;
 	private Timer timer;
-
 	HitBox HitBox;
-
 	public override void _Ready()
 	{
 		HitBox = GetNode<HitBox>("HitBox");
@@ -33,21 +27,16 @@ public partial class Knife : CharacterBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		
 		MoveComponent.AccelerateInDirection(Direction);
 		MoveComponent.Move(this);
 	}
 
-	public void OnHit()
+	public void OnTimeOut()
 	{
-		Penetrate -= 1;
-		if ( Penetrate <= 0 )
-		{
-			QueueFree();
-		}
+		QueueFree();
 	}
 
-	public void OnTimeOut()
+	public void OnHit()
 	{
 		QueueFree();
 	}
