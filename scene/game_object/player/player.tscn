@@ -138,7 +138,7 @@ script = ExtResource("1_w6ytr")
 [node name="KnifeAbility" parent="Abilities" instance=ExtResource("6_4ntij")]
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("4_e6n4r")]
-collision_layer = 0
+collision_layer = 2
 collision_mask = 8
 HealthComponent = NodePath("../HealthComponent")
 

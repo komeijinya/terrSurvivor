@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://rohlyxslhlrf"]
+[gd_scene load_steps=28 format=3 uid="uid://rohlyxslhlrf"]
 
 [ext_resource type="Script" uid="uid://t3wnn3gwc50y" path="res://scene/game_object/skeleton_archer/SkeletonArcher.cs" id="1_o2vpr"]
 [ext_resource type="Texture2D" uid="uid://cemwyk158db03" path="res://scene/game_object/skeleton_archer/NPC_110.png" id="2_eml4i"]
@@ -12,6 +12,10 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgc2h"]
 atlas = ExtResource("2_eml4i")
 region = Rect2(0, 1140, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfkoi"]
+atlas = ExtResource("2_eml4i")
+region = Rect2(0, 180, 60, 60)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xsufo"]
 atlas = ExtResource("2_eml4i")
@@ -81,6 +85,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_rfkoi")
+}],
+"loop": true,
+"name": &"Shoot",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_xsufo")
 }, {
 "duration": 1.0,
@@ -130,7 +142,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rfkoi"]
 size = Vector2(32, 52)
 
-[node name="SkeletonArcher" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_g256c"]
+
+[node name="SkeletonArcher" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 16
+collision_mask = 17
 script = ExtResource("1_o2vpr")
 ID = "skeleton_archer"
 MaxHealth = 30.0
@@ -139,7 +155,6 @@ MaxHealth = 30.0
 sprite_frames = SubResource("SpriteFrames_o2vpr")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.031573
 
 [node name="MoveComponent" parent="." instance=ExtResource("3_awwk6")]
 
@@ -159,3 +174,6 @@ healthComponent = NodePath("../HealthComponent")
 
 [node name="ShootComponent" parent="." instance=ExtResource("7_g256c")]
 Projectile = ExtResource("8_ifjqf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_g256c")

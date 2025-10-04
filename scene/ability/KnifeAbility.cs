@@ -22,7 +22,7 @@ public partial class KnifeAbility : BasicWeapon
     Random random = new Random();
     private Timer timer;
 
-    bool isaim = false;
+    bool isaim = true;
 
     int shoottime = 1;
 

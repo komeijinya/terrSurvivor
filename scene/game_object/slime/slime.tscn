@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://yhkmg3srvb1w"]
+[gd_scene load_steps=18 format=3 uid="uid://yhkmg3srvb1w"]
 
 [ext_resource type="Shader" uid="uid://d2faiyakkfe1o" path="res://scene/game_object/slime/slime.gdshader" id="1_b84jw"]
 [ext_resource type="Script" uid="uid://bcx7nxwrt5c2j" path="res://scene/game_object/slime/Slime.cs" id="1_q61bw"]
@@ -127,7 +127,11 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_q61bw"]
 radius = 17.0294
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_f2cmt"]
+
 [node name="Slime" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 16
+collision_mask = 17
 script = ExtResource("1_q61bw")
 ID = "slime"
 
@@ -156,11 +160,12 @@ autoplay = "Idle"
 frame_progress = 0.895995
 
 [node name="HurtBox" parent="JumpNode" node_paths=PackedStringArray("HealthComponent", "moveComponent") instance=ExtResource("6_iylds")]
-collision_layer = 16
-collision_mask = 4
 HealthComponent = NodePath("../../HealthComponent")
 isKnockable = true
 moveComponent = NodePath("../../MoveComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpNode/HurtBox"]
 shape = SubResource("CircleShape2D_q61bw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_f2cmt")
