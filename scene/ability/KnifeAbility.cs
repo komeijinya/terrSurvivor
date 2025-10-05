@@ -22,9 +22,9 @@ public partial class KnifeAbility : BasicWeapon
     Random random = new Random();
     private Timer timer;
 
-    bool isaim = true;
+    bool isaim = false;
 
-    int shoottime = 1;
+    int shoottime = 2;
 
     public override void _Ready()
     {
@@ -58,7 +58,7 @@ public partial class KnifeAbility : BasicWeapon
         }
     }
 
-    public void OnTimeOut()
+    public async void OnTimeOut()
     {
 
         for (int i = 0; i < shoottime; i++)
@@ -91,6 +91,7 @@ public partial class KnifeAbility : BasicWeapon
             KnifeInstance.Damage = BaseDamage;
             KnifeInstance.Penetrate = currentPenetrate;
             GetTree().GetFirstNodeInGroup("Projectile").AddChild(KnifeInstance);
+            await ToSignal(GetTree().CreateTimer(0.1f), SceneTreeTimer.SignalName.Timeout);
         }
 
     }

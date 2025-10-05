@@ -9,5 +9,6 @@ Sword = ExtResource("2_pb6lv")
 ID = "Sword"
 BaseCD = 2.0
 BaseDamage = 20.0
+BaseScale = Vector2(1.6, 1.6)
 
 [node name="Timer" type="Timer" parent="."]

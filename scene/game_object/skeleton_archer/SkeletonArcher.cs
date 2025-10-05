@@ -9,7 +9,7 @@ public partial class SkeletonArcher : BasicEnemy
 	private HealthComponent healthComponent;
 
 	private ShootComponent shootComponent;
-	[Export] public float ShootDistance = 350.0f;
+	[Export] public float ShootDistance = 400.0f;
 	[Export] public float RetreatDistance = 50.0f;
 
 	bool isShooting = false;
@@ -43,7 +43,7 @@ public partial class SkeletonArcher : BasicEnemy
 		{
 			case State.Chase:
 				shootComponent.Stop();
-				if (distanceToPlayer <= ShootDistance)
+				if (distanceToPlayer <= ShootDistance - 75f)
 				{
 					currentState = State.Aim;
 				}
