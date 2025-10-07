@@ -41,11 +41,6 @@ public partial class Slime : BasicEnemy
 			moveComponent.Move(this);
 	}
 
-	public Vector2 GetDirectionToPlayer()
-	{
-		Vector2 Direction = ((GetTree().GetFirstNodeInGroup("Player") as Player).GlobalPosition - GlobalPosition).Normalized();
-		return Direction;
-	}
 
 	public void SetIsMoving(bool isMove)
 	{

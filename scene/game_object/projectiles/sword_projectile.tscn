@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bl4vwf13j3wlj"]
+
+[ext_resource type="PackedScene" uid="uid://bh27c07ev5fql" path="res://scene/game_object/basic_projectile.tscn" id="1_l805w"]
+[ext_resource type="Script" uid="uid://j8j8dhoh3c3a" path="res://scene/game_object/projectiles/SwordProjectile.cs" id="2_tsm5d"]
+[ext_resource type="Texture2D" uid="uid://dyatv2kdw01vy" path="res://scene/game_object/projectiles/Projectile_684.png" id="3_tsm5d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwp3f"]
+size = Vector2(32, 82)
+
+[node name="SwordProjectile" instance=ExtResource("1_l805w")]
+script = ExtResource("2_tsm5d")
+IsFriend = true
+Penetrate = 4
+Damage = 5.0
+Speed = 750.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+rotation = 1.5708
+texture = ExtResource("3_tsm5d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(5, -1)
+shape = SubResource("RectangleShape2D_bwp3f")

@@ -11,6 +11,8 @@ public partial class SwordAbility : BasicWeapon
 
     public Timer Timer;
 
+    ShootComponent shootComponent;
+
     public override void _Ready()
     {
         BaseCD = 2f;
@@ -22,6 +24,8 @@ public partial class SwordAbility : BasicWeapon
         Timer.WaitTime = BaseCD;
         Timer.Start();
         GameEvent.Instance.UpdateUpgrade += OnUpdateUprade;
+        shootComponent = GetNode<ShootComponent>("ShootComponent");
+        shootComponent.SetCurrent();
     }
 
 
@@ -48,6 +52,9 @@ public partial class SwordAbility : BasicWeapon
         SwordInstance.LookAt(SwordInstance.GlobalPosition + SwordInstance.Direction);
         SwordInstance.Scale = BaseScale;
         GetTree().GetFirstNodeInGroup("Projectile").AddChild(SwordInstance);
+        shootComponent.Position = Position + SwordInstance.Direction * 50f;;
+        shootComponent.Direction = SwordInstance.Direction;
+        shootComponent.shoot();
     }
 
 

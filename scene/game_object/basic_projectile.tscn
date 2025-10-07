@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh27c07ev5fql"]
+
+[ext_resource type="Script" uid="uid://djvivskambty5" path="res://scene/game_object/BasicProjectile.cs" id="1_8i80k"]
+[ext_resource type="PackedScene" uid="uid://eknk2do5s685" path="res://scene/Component/hit_box.tscn" id="3_u73oh"]
+[ext_resource type="PackedScene" uid="uid://bdcpk1rcvg2mc" path="res://scene/Component/move_component.tscn" id="4_iph0a"]
+
+[node name="BasicProjectile" type="CharacterBody2D"]
+script = ExtResource("1_8i80k")
+
+[node name="HitBox" parent="." instance=ExtResource("3_u73oh")]
+collision_layer = 8
+collision_mask = 2
+
+[node name="MoveComponent" parent="." instance=ExtResource("4_iph0a")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true

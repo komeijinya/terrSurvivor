@@ -1,10 +1,15 @@
 using Godot;
 using System;
 
-public partial class  SkeletonArrow : BasicProjectile
+public partial class BasicProjectile : CharacterBody2D
 {
+	[Export] public bool IsFriend = false;
+	[Export] public int Penetrate = 1;
+	public Vector2 Direction = Vector2.Right;
+	[Export] public float Damage = 10;
 
-
+	[Export] public float Speed = 600f;
+	[Export] public float acceleration = 50;
 
 	private MoveComponent MoveComponent;
 	private Timer timer;
@@ -23,20 +28,20 @@ public partial class  SkeletonArrow : BasicProjectile
 		
 	}
 
-	
-	public override void _Process(double delta)
+	public void OnTimeOut()
 	{
-		MoveComponent.AccelerateInDirection(Direction);
-		MoveComponent.Move(this);
+		QueueFree();
 	}
 
-	public void SetFriend()
+	public void OnHit()
 	{
-		HitBox.SetCollisionLayerValue(4,false);
-		HitBox.SetCollisionMaskValue(2,false);
-
-		HitBox.SetCollisionLayerValue(3,true);
-		HitBox.SetCollisionMaskValue(5,true);
+		Penetrate -= 1;
+		if ( Penetrate <= 0 )
+		{
+			QueueFree();
+		}
 	}
+
+
 
 }

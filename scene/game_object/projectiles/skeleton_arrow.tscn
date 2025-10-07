@@ -10,7 +10,7 @@ size = Vector2(27, 15)
 
 [node name="SkeletonArrow" type="CharacterBody2D"]
 script = ExtResource("1_3b81o")
-Speed = 350.0
+Speed = 400.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708

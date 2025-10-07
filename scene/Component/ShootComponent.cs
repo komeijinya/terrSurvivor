@@ -7,7 +7,11 @@ public partial class ShootComponent : Node2D
 
     [Signal] public delegate void ShootedEventHandler();
 
+    public Vector2 Direction = Vector2.Right;
+
     Timer timer;
+
+    public bool CurrentShoot = false;
 
 
     public override void _Ready()
@@ -18,8 +22,12 @@ public partial class ShootComponent : Node2D
 
     public void OnTimeOut()
     {
-        SkeletonArrow ProjectileInstance = Projectile.Instantiate<SkeletonArrow>();
-        ProjectileInstance.Direction = GetDirectionToPlayer();
+        BasicProjectile ProjectileInstance = Projectile.Instantiate<BasicProjectile>();
+        if(!ProjectileInstance.IsFriend)
+        {
+            Direction = GetDirectionToPlayer();
+        }
+        ProjectileInstance.Direction = Direction;
         ProjectileInstance.GlobalPosition = GlobalPosition;
         ProjectileInstance.LookAt(ProjectileInstance.GlobalPosition + ProjectileInstance.Direction);
         GetTree().GetFirstNodeInGroup("Projectile").AddChild(ProjectileInstance);
@@ -34,12 +42,25 @@ public partial class ShootComponent : Node2D
 
     public void shoot()
     {
-        timer.Start();
+        if(!CurrentShoot)
+        {
+            timer.Start();
+        }
+        else
+        {
+            OnTimeOut();
+        }
+        
     }
     public void Stop()
     {
         timer.Stop();
         EmitSignal(SignalName.Shooted);
+    }
+
+    public void SetCurrent()
+    {
+        CurrentShoot = true;
     }
 
 

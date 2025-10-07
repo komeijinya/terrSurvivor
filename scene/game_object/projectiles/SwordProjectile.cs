@@ -1,11 +1,9 @@
 using Godot;
 using System;
 
-public partial class  SkeletonArrow : BasicProjectile
+public partial class SwordProjectile : BasicProjectile
 {
-
-
-
+	// Called when the node enters the scene tree for the first time.
 	private MoveComponent MoveComponent;
 	private Timer timer;
 	HitBox HitBox;
@@ -19,11 +17,15 @@ public partial class  SkeletonArrow : BasicProjectile
 		MoveComponent.MaxSpeed = Speed;
 		timer = GetNode<Timer>("Timer");
 		timer.Timeout += OnTimeOut;
+		if(IsFriend)
+		{
+			SetFriend();
+		}
 		
 		
 	}
 
-	
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		MoveComponent.AccelerateInDirection(Direction);
@@ -37,6 +39,7 @@ public partial class  SkeletonArrow : BasicProjectile
 
 		HitBox.SetCollisionLayerValue(3,true);
 		HitBox.SetCollisionMaskValue(5,true);
+		
 	}
 
 }

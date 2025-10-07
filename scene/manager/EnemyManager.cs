@@ -29,6 +29,7 @@ public partial class EnemyManager : Node
         spawnerInstance.SetEnemySpawner(enemyTable,3);
         Spawners.Add(spawnerInstance);
         GameTimeManager.DifficultUpdate += OnDifficultUpdate;
+        
     }
 
     public Vector2 GetSpawnPosition()
@@ -62,9 +63,9 @@ public partial class EnemyManager : Node
         }
 
 
-        if(currentDifficult == 10)
+        if(currentDifficult == 1)
         {
-            Spawners[0].AddEnemy(Zombie,30);
+            Spawners[0].AddEnemy(Zombie,1);
             Spawners[0].AddEnemy(SkeletonArcher,10);
         }
     }

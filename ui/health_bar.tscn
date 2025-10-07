@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqfvv20pdbmnl"]
 
 [ext_resource type="Script" uid="uid://k048wdsx3rx" path="res://ui/HealthBar.cs" id="1_1w8tp"]
-[ext_resource type="Texture2D" uid="uid://bq1hdpc5m0okx" path="res://Healty/Heart_Single_Fancy.png" id="1_prk0l"]
-[ext_resource type="Texture2D" uid="uid://cbdd35sekvpec" path="res://Healty/Heart_Fill.png" id="2_1w8tp"]
+[ext_resource type="Texture2D" uid="uid://bq1hdpc5m0okx" path="res://ui/Heart_Single_Fancy.png" id="1_prk0l"]
+[ext_resource type="Texture2D" uid="uid://cbdd35sekvpec" path="res://ui/Heart_Fill.png" id="2_1w8tp"]
 
 [node name="HealthBar" type="CanvasLayer"]
 script = ExtResource("1_1w8tp")
