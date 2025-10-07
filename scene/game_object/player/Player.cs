@@ -9,6 +9,8 @@ public partial class Player : CharacterBody2D
 	[Export] float MaxHealth = 100;
 	private HealthComponent healthComponent;
 
+	private HealthBar healthBar;
+
 	public MoveComponent MoveComponent;
 	public AnimatedSprite2D AnimatedSprite2D;
 
@@ -17,8 +19,11 @@ public partial class Player : CharacterBody2D
 		MoveComponent = GetNode<MoveComponent>("MoveComponent");
 		AnimatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		healthComponent = GetNode<HealthComponent>("HealthComponent");
+		healthBar = GetNode<HealthBar>("HealthBar");
 		healthComponent.MaxHealth = MaxHealth;
 		healthComponent.Died += OnDied;
+		healthComponent.Hurt += OnHurt;
+		healthBar.SetValue(1);
 		GameEvent.Instance.UpdateUpgrade += OnUpdateUprade;
 		
 	}
@@ -69,6 +74,11 @@ public partial class Player : CharacterBody2D
 			Node2D abilities = GetNode<Node2D>("Abilities");
 			abilities.AddChild(ability.AbilityManagerScene.Instantiate());
 		}
+	}
+
+	public void OnHurt(float healthPercent)
+	{
+		healthBar.SetValue(healthPercent);
 	}
 
 

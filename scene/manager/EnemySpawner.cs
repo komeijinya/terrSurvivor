@@ -8,16 +8,18 @@ public partial class EnemySpawner : Node
     public double BaseSpawnTime = 3;
     public int SPAWNRADIUS = 500;
 
+    Random random = new Random();
+
     WeightedDictionary<string, PackedScene> enemyTable = new WeightedDictionary<string, PackedScene>();
 
 
-    public void SetEnemySpawner(WeightedDictionary<string, PackedScene> enemytable,double baseSpawnTime)
+    public void SetEnemySpawner(WeightedDictionary<string, PackedScene> enemytable, double baseSpawnTime)
     {
         BaseSpawnTime = baseSpawnTime;
         enemyTable = enemytable.Clone();
     }
 
-    
+
     public override void _Ready()
     {
         Timer = new Timer();
@@ -27,13 +29,19 @@ public partial class EnemySpawner : Node
         Timer.Start();
     }
 
-    public void OnTimeOut()
+    public async void OnTimeOut()
     {
         Timer.Start();
+        Vector2 spawnPosition = GetSpawnPosition();
 
-        var enemyInstance = enemyTable.GetRandom().Instantiate<BasicEnemy>();
-        enemyInstance.GlobalPosition = GetSpawnPosition();
-        GetTree().GetFirstNodeInGroup("Enemies").AddChild(enemyInstance);
+        for (int i = 0; i < random.NextInt64(2, 5); i++)
+        {
+            var enemyInstance = enemyTable.GetRandom().Instantiate<BasicEnemy>();
+            enemyInstance.GlobalPosition = spawnPosition + new Vector2(random.NextInt64(-25,25),random.NextInt64(-25,25)) * 2;
+            GetTree().GetFirstNodeInGroup("Enemies").AddChild(enemyInstance);
+            await ToSignal(GetTree().CreateTimer(0.1f), SceneTreeTimer.SignalName.Timeout);
+        }
+
 
 
     }
@@ -52,10 +60,10 @@ public partial class EnemySpawner : Node
 
         return SpawnPosition;
     }
-    
-    public void AddEnemy(PackedScene enemy,float weight)
+
+    public void AddEnemy(PackedScene enemy, float weight)
     {
-        enemyTable.AddOrUpdate(enemy.Instantiate<BasicEnemy>().ID,enemy,weight);
+        enemyTable.AddOrUpdate(enemy.Instantiate<BasicEnemy>().ID, enemy, weight);
     }
 
     public void RemoveEnemy(PackedScene enemy)
@@ -65,7 +73,7 @@ public partial class EnemySpawner : Node
 
     public void SetSpawnTime(double time)
     {
-        if(time <= 0.1)
+        if (time <= 0.1)
         {
             return;
         }

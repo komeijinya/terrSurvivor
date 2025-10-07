@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://7mk6cnw52jse"]
+[gd_scene load_steps=28 format=3 uid="uid://7mk6cnw52jse"]
 
 [ext_resource type="Texture2D" uid="uid://c4ov5qxlxbanr" path="res://scene/game_object/player/NPC_22.png" id="1_uiyt1"]
 [ext_resource type="Script" uid="uid://b6k0ridnlx3nq" path="res://scene/game_object/player/Player.cs" id="1_w6ytr"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://co2cwm6n13oph" path="res://scene/Component/hurt_box.tscn" id="4_e6n4r"]
 [ext_resource type="PackedScene" uid="uid://dctdskvjnl5v0" path="res://scene/manager/level_manager.tscn" id="5_e6n4r"]
 [ext_resource type="PackedScene" uid="uid://c04nm2upxaq3" path="res://scene/ability/knife_ability.tscn" id="6_4ntij"]
+[ext_resource type="PackedScene" uid="uid://cqfvv20pdbmnl" path="res://ui/health_bar.tscn" id="9_fgks1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ntij"]
 size = Vector2(19, 37)
@@ -174,3 +175,5 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpArea"]
 position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_4ntij")
+
+[node name="HealthBar" parent="." instance=ExtResource("9_fgks1")]

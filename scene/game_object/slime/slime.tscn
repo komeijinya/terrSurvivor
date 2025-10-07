@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://yhkmg3srvb1w"]
+[gd_scene load_steps=20 format=3 uid="uid://yhkmg3srvb1w"]
 
 [ext_resource type="Shader" uid="uid://d2faiyakkfe1o" path="res://scene/game_object/slime/slime.gdshader" id="1_b84jw"]
 [ext_resource type="Script" uid="uid://bcx7nxwrt5c2j" path="res://scene/game_object/slime/Slime.cs" id="1_q61bw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bdcpk1rcvg2mc" path="res://scene/Component/move_component.tscn" id="3_kpory"]
 [ext_resource type="PackedScene" uid="uid://djllbdtnd6ms6" path="res://scene/Component/drop_component.tscn" id="4_f2cmt"]
 [ext_resource type="PackedScene" uid="uid://co2cwm6n13oph" path="res://scene/Component/hurt_box.tscn" id="6_iylds"]
+[ext_resource type="PackedScene" uid="uid://eknk2do5s685" path="res://scene/Component/hit_box.tscn" id="8_kpory"]
 
 [sub_resource type="Animation" id="Animation_kpory"]
 length = 0.001
@@ -127,6 +128,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_q61bw"]
 radius = 17.0294
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_iylds"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_f2cmt"]
 
 [node name="Slime" type="CharacterBody2D" groups=["enemy"]]
@@ -166,6 +169,14 @@ moveComponent = NodePath("../../MoveComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpNode/HurtBox"]
 shape = SubResource("CircleShape2D_q61bw")
+
+[node name="HitBox" parent="." instance=ExtResource("8_kpory")]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("CircleShape2D_iylds")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_f2cmt")

@@ -4,6 +4,7 @@ using System;
 public partial class HealthComponent : Node
 {
     [Signal] public delegate void DiedEventHandler();
+    [Signal] public delegate void HurtEventHandler(float healthPercent);
     [Export] public float MaxHealth = 100f;
     public float CurrentHealth;
 
@@ -16,6 +17,7 @@ public partial class HealthComponent : Node
     public void Damage(float value)
     {
         CurrentHealth = (CurrentHealth - value > 0 ? CurrentHealth - value : 0);
+        EmitSignal(SignalName.Hurt,CurrentHealth/MaxHealth);
         CheckDied();
     }
 

@@ -24,7 +24,6 @@ public partial class EnemyManager : Node
     {
         
         enemyTable.AddOrUpdate("slime",Slime,20);
-        enemyTable.AddOrUpdate(SkeletonArcher.Instantiate<BasicEnemy>().ID,SkeletonArcher,30);
         EnemySpawner spawnerInstance = EnemySpawner.Instantiate<EnemySpawner>();
         AddChild(spawnerInstance);
         spawnerInstance.SetEnemySpawner(enemyTable,3);
@@ -52,9 +51,21 @@ public partial class EnemyManager : Node
     {
 
         Spawners[0].SetSpawnTime(Spawners[0].BaseSpawnTime - (float)currentDifficult * 0.1);
-        if(currentDifficult >= 4)
+        if(currentDifficult == 4)
         {
             Spawners[0].AddEnemy(Zombie,10);
+        }
+
+        if(currentDifficult == 8)
+        {
+            Spawners[0].RemoveEnemy(Slime);
+        }
+
+
+        if(currentDifficult == 10)
+        {
+            Spawners[0].AddEnemy(Zombie,30);
+            Spawners[0].AddEnemy(SkeletonArcher,10);
         }
     }
 }
