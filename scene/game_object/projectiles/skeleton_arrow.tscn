@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bl13tb3cksclw"]
+[gd_scene load_steps=8 format=3 uid="uid://bl13tb3cksclw"]
 
 [ext_resource type="Script" uid="uid://3fl7diokm205" path="res://scene/game_object/projectiles/SkeletonArrow.cs" id="1_3b81o"]
+[ext_resource type="Shader" uid="uid://dppoai8i0s2fy" path="res://scene/game_object/projectiles/skeleton_arrow.gdshader" id="2_ctp3n"]
 [ext_resource type="Texture2D" uid="uid://cxu8r53uywtw1" path="res://scene/game_object/projectiles/Projectile_117.png" id="2_u1w7f"]
 [ext_resource type="PackedScene" uid="uid://eknk2do5s685" path="res://scene/Component/hit_box.tscn" id="3_ctp3n"]
 [ext_resource type="PackedScene" uid="uid://bdcpk1rcvg2mc" path="res://scene/Component/move_component.tscn" id="4_h6tc8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h6tc8"]
+shader = ExtResource("2_ctp3n")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_twqfi"]
 size = Vector2(27, 15)
@@ -13,6 +17,7 @@ script = ExtResource("1_3b81o")
 Speed = 400.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_h6tc8")
 rotation = 1.5708
 texture = ExtResource("2_u1w7f")
 

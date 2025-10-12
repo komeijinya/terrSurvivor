@@ -8,6 +8,8 @@ public partial class EnemySpawner : Node
     public double BaseSpawnTime = 3;
     public int SPAWNRADIUS = 500;
 
+    private int spawnCount = 1;
+
     Random random = new Random();
 
     WeightedDictionary<string, PackedScene> enemyTable = new WeightedDictionary<string, PackedScene>();
@@ -34,7 +36,7 @@ public partial class EnemySpawner : Node
         Timer.Start();
         Vector2 spawnPosition = GetSpawnPosition();
 
-        for (int i = 0; i < random.NextInt64(2, 5); i++)
+        for (int i = 0; i < random.NextInt64(1, spawnCount + 1); i++)
         {
             var enemyInstance = enemyTable.GetRandom().Instantiate<BasicEnemy>();
             enemyInstance.GlobalPosition = spawnPosition + new Vector2(random.NextInt64(-25,25),random.NextInt64(-25,25)) * 2;
@@ -80,6 +82,13 @@ public partial class EnemySpawner : Node
         Timer.WaitTime = time;
         Timer.Start();
     }
+
+
+    public  void SetSpawnCount(int count)
+    {
+        spawnCount = count;
+    }
+
 
 
 }

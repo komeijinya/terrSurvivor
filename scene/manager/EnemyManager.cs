@@ -12,9 +12,9 @@ public partial class EnemyManager : Node
     [Export] public GameTimeManager GameTimeManager;
     [Export] public PackedScene EnemySpawner;
 
-    
 
-    WeightedDictionary<string,PackedScene> enemyTable = new WeightedDictionary<string,PackedScene>();
+
+    WeightedDictionary<string, PackedScene> enemyTable = new WeightedDictionary<string, PackedScene>();
 
     List<EnemySpawner> Spawners = new List<EnemySpawner>();
     public int SPAWNRADIUS = 500;
@@ -22,20 +22,21 @@ public partial class EnemyManager : Node
 
     public override void _Ready()
     {
-        
-        enemyTable.AddOrUpdate("slime",Slime,20);
+
+        enemyTable.AddOrUpdate("slime", Slime, 20);
         EnemySpawner spawnerInstance = EnemySpawner.Instantiate<EnemySpawner>();
         AddChild(spawnerInstance);
-        spawnerInstance.SetEnemySpawner(enemyTable,3);
+        spawnerInstance.SetEnemySpawner(enemyTable, 3);
         Spawners.Add(spawnerInstance);
+        spawnerInstance.SetSpawnCount(4);
         GameTimeManager.DifficultUpdate += OnDifficultUpdate;
-        
+
     }
 
     public Vector2 GetSpawnPosition()
     {
         Player player = GetTree().GetFirstNodeInGroup("Player") as Player;
-        if(player is null)
+        if (player is null)
         {
             return Vector2.Zero;
         }
@@ -52,21 +53,25 @@ public partial class EnemyManager : Node
     {
 
         Spawners[0].SetSpawnTime(Spawners[0].BaseSpawnTime - (float)currentDifficult * 0.1);
-        if(currentDifficult == 4)
+        if (currentDifficult == 4)
         {
-            Spawners[0].AddEnemy(Zombie,10);
+            Spawners[0].AddEnemy(Zombie, 10);
         }
 
-        if(currentDifficult == 8)
+        if (currentDifficult == 8)
         {
             Spawners[0].RemoveEnemy(Slime);
         }
 
 
-        if(currentDifficult == 1)
+        if (currentDifficult == 1)
         {
-            Spawners[0].AddEnemy(Zombie,1);
-            Spawners[0].AddEnemy(SkeletonArcher,10);
+            Spawners[0].AddEnemy(Zombie, 30);
+            EnemySpawner spawnerInstance = EnemySpawner.Instantiate<EnemySpawner>();
+            AddChild(spawnerInstance);
+            spawnerInstance.AddEnemy(SkeletonArcher,10);
+            spawnerInstance.SetSpawnTime(5);
+            Spawners.Add(spawnerInstance);
         }
     }
 }
