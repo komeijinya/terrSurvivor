@@ -13,6 +13,10 @@ public partial class SwordAbility : BasicWeapon
 
     ShootComponent shootComponent;
 
+    private static ability_upgrade SwordProjectile = GD.Load<ability_upgrade>("res://upgrades/sword_projectile.tres");
+
+    private bool isShooting = false;
+
     public override void _Ready()
     {
         BaseCD = 2f;
@@ -52,9 +56,13 @@ public partial class SwordAbility : BasicWeapon
         SwordInstance.LookAt(SwordInstance.GlobalPosition + SwordInstance.Direction);
         SwordInstance.Scale = BaseScale;
         GetTree().GetFirstNodeInGroup("Projectile").AddChild(SwordInstance);
-        shootComponent.Position = Position + SwordInstance.Direction * 50f;;
-        shootComponent.Direction = SwordInstance.Direction;
-        shootComponent.shoot();
+        if (isShooting)
+        {
+            shootComponent.Position = Position + SwordInstance.Direction * 50f; ;
+            shootComponent.Direction = SwordInstance.Direction;
+            shootComponent.shoot();
+        }
+
     }
 
 
@@ -66,6 +74,18 @@ public partial class SwordAbility : BasicWeapon
             BaseScale = Vector2.One * (1.6f + (float)((Dictionary)currentUpgrades["sword_upgrade"])["quantity"] * 0.2f);
             Timer.WaitTime = currentCD;
             Timer.Start();
+
+            
+            if ((int)((Dictionary)currentUpgrades["sword_upgrade"])["quantity"] == 2)
+            {
+                GameEvent.Instance.EmitUpdateUpgradesPool(SwordProjectile, 10);
+                
+            }
+        }
+
+        if(chosenAbility.Id == SwordProjectile.Id)
+        {
+            isShooting = true;
         }
     }
 

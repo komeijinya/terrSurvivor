@@ -11,30 +11,64 @@ public partial class HurtBox : Area2D
 
 	[Export] MoveComponent moveComponent;
 
-    public override void _Ready()
-    {
-        AreaEntered += OnAreaEntered;
-    }
+	private Timer hurtInterval;
+
+	private bool CanHurt = true;
+
+	public override void _Ready()
+	{
+		hurtInterval = GetNode<Timer>("Timer");
+		AreaEntered += OnAreaEntered;
+		hurtInterval.Timeout += OnHurtIntervalTimeOut;
+	}
 
 	public void OnAreaEntered(Area2D area)
 	{
-		if (area is not HitBox)
+		// if (area is not HitBox)
+		// {
+		// 	return;
+		// }
+		// HitBox hitarea = (HitBox)area;
+		// HealthComponent.Damage(hitarea.Damage);
+		// if (isKnockable)
+		// {
+		// 	KnockingBack(area as HitBox);
+		// }
+		// EmitSignal(SignalName.Hurt);
+
+	}
+
+	public void Hurting(Area2D area)
+	{
+		GD.Print("hello");
+		if (CanHurt)
 		{
-			return;
+			if (area is not HitBox)
+			{
+				return;
+			}
+			HitBox hitarea = (HitBox)area;
+			HealthComponent.Damage(hitarea.Damage);
+			if (isKnockable)
+			{
+				KnockingBack(area as HitBox);
+			}
+			EmitSignal(SignalName.Hurt);
+			CanHurt = false;
+			hurtInterval.Start();
 		}
-		HitBox hitarea = (HitBox)area;
-		HealthComponent.Damage(hitarea.Damage);
-		if(isKnockable)
-		{
-			KnockingBack(area as HitBox);
-		}
-		EmitSignal(SignalName.Hurt);
-		
+
+
 	}
 	public void KnockingBack(HitBox hitBox)
 	{
 		Vector2 KnockDirection = (GlobalPosition - hitBox.GlobalPosition).Normalized();
-		moveComponent.GetPush(KnockDirection,hitBox.KnockBackStrength);
+		moveComponent.GetPush(KnockDirection, hitBox.KnockBackStrength);
 	}
+
+	public void OnHurtIntervalTimeOut()
+    {
+		CanHurt = true;
+    }
 
 }

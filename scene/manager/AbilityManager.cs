@@ -12,8 +12,10 @@ public partial class AbilityManager : Node
 
     [Export] public PackedScene UpgradeScreen;
     public WeightedDictionary<string,ability_upgrade> UpgardesPool = new WeightedDictionary<string,ability_upgrade>();
+
+    public Dictionary CurrentUpgrades = new Dictionary { };
     
-    public Dictionary CurrentUpgrades = new Dictionary{};
+    
 
     private static ability_upgrade KnifeUpgrade = GD.Load<ability_upgrade>("res://upgrades/knife_upgrade.tres");
 
@@ -26,7 +28,8 @@ public partial class AbilityManager : Node
     public override void _Ready()
     {
         UpgardesPool.AddOrUpdate(KnifeUpgrade.Id,KnifeUpgrade,10);
-        UpgardesPool.AddOrUpdate(Sword.Id,Sword,10);
+        UpgardesPool.AddOrUpdate(Sword.Id, Sword, 10);
+        //UpgardesPool.AddOrUpdate(SwordProjectile.Id,SwordProjectile,10);
         levelManager.LevelUp += OnLevelUp;
 
         GameEvent.Instance.UpdateUpgradesPool += OnUpdateUpgradesPool;
@@ -121,7 +124,7 @@ public partial class AbilityManager : Node
 
     public void OnUpdateUpgradesPool(ability_upgrade ability_Upgrade,float weight)
     {
-        GD.Print("hello");
+        
         UpgardesPool.AddOrUpdate(ability_Upgrade.Id,ability_Upgrade,weight);
     }
 
