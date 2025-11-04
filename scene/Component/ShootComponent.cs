@@ -7,6 +7,10 @@ public partial class ShootComponent : Node2D
 
     [Signal] public delegate void ShootedEventHandler();
 
+    float BaseRadius = 0;
+
+    bool isExplosion = false;
+
     public Vector2 Direction = Vector2.Right;
 
     Timer timer;
@@ -23,6 +27,10 @@ public partial class ShootComponent : Node2D
     public void OnTimeOut()
     {
         BasicProjectile ProjectileInstance = Projectile.Instantiate<BasicProjectile>();
+        if(isExplosion)
+        {
+            ProjectileInstance.radius = BaseRadius;
+        }
         if(!ProjectileInstance.IsFriend)
         {
             Direction = GetDirectionToPlayer();
@@ -63,6 +71,10 @@ public partial class ShootComponent : Node2D
         CurrentShoot = true;
     }
 
-
+    public void SetExplosion(float Radius)
+    {
+        isExplosion = true;
+        BaseRadius = Radius;
+    }
 
 }

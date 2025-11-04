@@ -17,4 +17,15 @@ public partial class BasicEnemy : CharacterBody2D
 		Vector2 Direction = ((GetTree().GetFirstNodeInGroup("Player") as Player).GlobalPosition - GlobalPosition).Normalized();
 		return Direction;
 	}
+
+	public virtual void OnHurt()
+	{
+		
+	}
+
+	public virtual void OnDied()
+	{
+		QueueFree();
+	}
+	
 }

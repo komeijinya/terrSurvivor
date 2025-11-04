@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbxjjkaiwwguo"]
+
+[ext_resource type="PackedScene" uid="uid://eknk2do5s685" path="res://scene/Component/hit_box.tscn" id="1_02xm1"]
+[ext_resource type="Script" uid="uid://bar17cidwxyan" path="res://BoomArea.cs" id="2_2gxot"]
+[ext_resource type="PackedScene" uid="uid://bjc5jjlefxp5e" path="res://scene/Particles/BoomEffect.tscn" id="3_2gxot"]
+
+[node name="BoomArea" instance=ExtResource("1_02xm1")]
+collision_layer = 4
+collision_mask = 16
+script = ExtResource("2_2gxot")
+BoomParticle = ExtResource("3_2gxot")
+KnockBackStrength = 200.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+debug_color = Color(1, 0, 0, 0.4392157)

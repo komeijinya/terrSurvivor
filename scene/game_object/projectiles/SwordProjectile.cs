@@ -32,14 +32,16 @@ public partial class SwordProjectile : BasicProjectile
 		MoveComponent.Move(this);
 	}
 
-	public void SetFriend()
+	public override void SetFriend()
 	{
-		HitBox.SetCollisionLayerValue(4,false);
-		HitBox.SetCollisionMaskValue(2,false);
+		HitBox.SetCollisionLayerValue(4, false);
+		HitBox.SetCollisionMaskValue(2, false);
 
-		HitBox.SetCollisionLayerValue(3,true);
-		HitBox.SetCollisionMaskValue(5,true);
-		
+		HitBox.SetCollisionLayerValue(3, true);
+		HitBox.SetCollisionMaskValue(5, true);
+
 	}
+
+
 
 }

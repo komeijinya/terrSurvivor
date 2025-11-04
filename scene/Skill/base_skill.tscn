@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://s4wavfb3shdi"]
+
+[ext_resource type="Script" uid="uid://djix0ws6sh6ox" path="res://scene/Skill/BaseSkill.cs" id="1_mqqp6"]
+
+[node name="BaseSkill" type="Node2D"]
+script = ExtResource("1_mqqp6")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 12.0
+one_shot = true

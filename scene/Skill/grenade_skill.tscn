@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvu2uxo3hscsj"]
+
+[ext_resource type="PackedScene" uid="uid://s4wavfb3shdi" path="res://scene/Skill/base_skill.tscn" id="1_6ls63"]
+[ext_resource type="PackedScene" uid="uid://dsas7lm6215qt" path="res://scene/Component/shoot_component.tscn" id="2_badis"]
+[ext_resource type="Script" uid="uid://c2ngukqeramxp" path="res://scene/Skill/GrenadeSkill.cs" id="2_n4siv"]
+[ext_resource type="PackedScene" uid="uid://cde1csnv14a65" path="res://scene/game_object/projectiles/boom_projectile.tscn" id="3_6ls63"]
+
+[node name="GrenadeSkill" instance=ExtResource("1_6ls63")]
+script = ExtResource("2_n4siv")
+BaseRadius = 60.0
+ID = "grenade_skill"
+
+[node name="ShootComponent" parent="." index="0" instance=ExtResource("2_badis")]
+Projectile = ExtResource("3_6ls63")

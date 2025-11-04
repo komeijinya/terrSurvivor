@@ -21,14 +21,16 @@ public partial class AbilityManager : Node
 
     private static ability_upgrade SwordUpgrade = GD.Load<ability_upgrade>("res://upgrades/sword_upgrade.tres");
 
-    
 
-    
+
+
     private static ability_upgrade Sword = GD.Load<Ability>("res://upgrades/sword.tres");
+    private static ability_upgrade GrenadeSkill = GD.Load<Ability>("res://upgrades/grenade_skill.tres");
     public override void _Ready()
     {
         UpgardesPool.AddOrUpdate(KnifeUpgrade.Id,KnifeUpgrade,10);
         UpgardesPool.AddOrUpdate(Sword.Id, Sword, 10);
+        UpgardesPool.AddOrUpdate(GrenadeSkill.Id,GrenadeSkill,10);
         //UpgardesPool.AddOrUpdate(SwordProjectile.Id,SwordProjectile,10);
         levelManager.LevelUp += OnLevelUp;
 

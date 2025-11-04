@@ -40,6 +40,7 @@ public partial class Knife : CharacterBody2D
 
 	public void OnHit()
 	{
+
 		Penetrate -= 1;
 		if ( Penetrate <= 0 )
 		{

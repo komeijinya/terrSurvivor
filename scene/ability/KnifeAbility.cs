@@ -22,9 +22,9 @@ public partial class KnifeAbility : BasicWeapon
     Random random = new Random();
     private Timer timer;
 
-    bool isaim = false;
+    bool isaim = true;
 
-    int shoottime = 2;
+    int shoottime = 1;
 
     public override void _Ready()
     {
@@ -35,8 +35,9 @@ public partial class KnifeAbility : BasicWeapon
         timer.Timeout += OnTimeOut;
         timer.Start();
         GameEvent.Instance.UpdateUpgrade += OnUpdateUprade;
+        currentPenetrate = BasePenetrate;
 
-        GD.Print(KnifeAim);
+        
 
     }
 

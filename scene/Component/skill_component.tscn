@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://da8eim1co43u2"]
+
+[ext_resource type="Script" uid="uid://b612fhq8prk6l" path="res://scene/Component/SkillComponent.cs" id="1_krnon"]
+[ext_resource type="PackedScene" uid="uid://cvu2uxo3hscsj" path="res://scene/Skill/grenade_skill.tscn" id="2_7dx0p"]
+
+[node name="SkillComponent" type="Node2D"]
+script = ExtResource("1_krnon")
+SkillScene = Array[PackedScene]([ExtResource("2_7dx0p")])

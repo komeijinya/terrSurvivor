@@ -15,4 +15,3 @@ EnemySpawner = ExtResource("4_o4viv")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
-autostart = true

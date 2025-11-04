@@ -13,6 +13,7 @@ public partial class Player : CharacterBody2D
 
 	public MoveComponent MoveComponent;
 	public AnimatedSprite2D AnimatedSprite2D;
+	SkillComponent skillComponent;
 
 	public override void _Ready()
 	{
@@ -20,32 +21,34 @@ public partial class Player : CharacterBody2D
 		AnimatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		healthComponent = GetNode<HealthComponent>("HealthComponent");
 		healthBar = GetNode<HealthBar>("HealthBar");
+		skillComponent = GetNode<SkillComponent>("SkillComponent");
 		healthComponent.MaxHealth = MaxHealth;
 		healthComponent.Died += OnDied;
 		healthComponent.Hurt += OnHurt;
 		healthBar.SetValue(1);
 		GameEvent.Instance.UpdateUpgrade += OnUpdateUprade;
-		
+
 	}
 
-	
+
 	public override void _Process(double delta)
 	{
-		
+
 		Vector2 direction = GetMoveDirection();
-		if(direction != Vector2.Zero)
+
+		if (direction != Vector2.Zero)
 		{
 			AnimatedSprite2D.Play("walk");
 		}
 		else
 		{
-			 AnimatedSprite2D.Play("stand"); 
+			AnimatedSprite2D.Play("stand");
 		}
-		if (direction.X > 0) 
+		if (direction.X > 0)
 		{
 			AnimatedSprite2D.FlipH = true;
 		}
-		else if(direction.X < 0) 
+		else if (direction.X < 0)
 		{
 			AnimatedSprite2D.FlipH = false;
 		}
@@ -57,7 +60,7 @@ public partial class Player : CharacterBody2D
 	public Vector2 GetMoveDirection()
 	{
 		Vector2 direction = new Vector2();
-		direction = Input.GetVector("move_left","move_right","move_up","move_down");
+		direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 		return direction;
 	}
 
@@ -66,13 +69,20 @@ public partial class Player : CharacterBody2D
 		EmitSignal(SignalName.PlayerDied);
 	}
 
-	public void OnUpdateUprade(Dictionary currentUpgrades,ability_upgrade chosenAbility)
+	public void OnUpdateUprade(Dictionary currentUpgrades, ability_upgrade chosenAbility)
 	{
-		if(chosenAbility is Ability)
+		if (chosenAbility is Ability)
 		{
 			var ability = chosenAbility as Ability;
-			Node2D abilities = GetNode<Node2D>("Abilities");
-			abilities.AddChild(ability.AbilityManagerScene.Instantiate());
+			if (ability.isSkill)
+			{
+				skillComponent.AddSkill(ability);
+			}
+			else
+			{
+				Node2D abilities = GetNode<Node2D>("Abilities");
+				abilities.AddChild(ability.AbilityManagerScene.Instantiate());
+			}
 		}
 	}
 

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbwhv7k1cd0wc"]
+
+[ext_resource type="PackedScene" uid="uid://dinnu75hfwt0d" path="res://scene/game_object/zombie/zombie.tscn" id="1_r0uqf"]
+[ext_resource type="Script" uid="uid://bxbhjksi3ni3j" path="res://scene/game_object/TestEnemy/TestEnemy.cs" id="2_k6630"]
+
+[node name="TestEnemy" instance=ExtResource("1_r0uqf")]
+script = ExtResource("2_k6630")
+ID = "basic_enemy"
+Acceleration = 0.0
+MaxHealth = 9999.0
+MaxSpeed = 0.0
+
+[node name="MoveComponent" parent="." index="2"]
+MaxSpeed = 0.0
+acceleration = 0.0
+
+[node name="HealthComponent" parent="." index="3"]
+MaxHealth = 9999.0

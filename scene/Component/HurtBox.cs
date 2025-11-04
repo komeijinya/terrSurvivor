@@ -38,14 +38,14 @@ public partial class HurtBox : Area2D
 
 	}
 
-	public void Hurting(Area2D area)
+	public bool Hurting(Area2D area)
 	{
-		GD.Print("hello");
+		
 		if (CanHurt)
 		{
 			if (area is not HitBox)
 			{
-				return;
+				return false;
 			}
 			HitBox hitarea = (HitBox)area;
 			HealthComponent.Damage(hitarea.Damage);
@@ -56,7 +56,12 @@ public partial class HurtBox : Area2D
 			EmitSignal(SignalName.Hurt);
 			CanHurt = false;
 			hurtInterval.Start();
+			return true;
 		}
+		else
+        {
+			return false;
+        }
 
 
 	}

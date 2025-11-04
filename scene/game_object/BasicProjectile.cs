@@ -7,7 +7,7 @@ public partial class BasicProjectile : CharacterBody2D
 	[Export] public int Penetrate = 1;
 	public Vector2 Direction = Vector2.Right;
 	[Export] public float Damage = 10;
-
+	[Export] public float radius = 0;
 	[Export] public float Speed = 600f;
 	[Export] public float acceleration = 50;
 
@@ -24,8 +24,19 @@ public partial class BasicProjectile : CharacterBody2D
 		MoveComponent.MaxSpeed = Speed;
 		timer = GetNode<Timer>("Timer");
 		timer.Timeout += OnTimeOut;
-		
-		
+		if(IsFriend)
+        {
+			SetFriend();
+        }
+
+
+	}
+
+	public override void _Process(double delta)
+	{
+
+		MoveComponent.AccelerateInDirection(Direction);
+		MoveComponent.Move(this);
 	}
 
 	public void OnTimeOut()
@@ -33,15 +44,24 @@ public partial class BasicProjectile : CharacterBody2D
 		QueueFree();
 	}
 
-	public void OnHit()
+	public virtual void OnHit()
 	{
 		Penetrate -= 1;
-		if ( Penetrate <= 0 )
+		if (Penetrate <= 0)
 		{
 			QueueFree();
 		}
 	}
 
+	public virtual void SetFriend()
+	{
+		HitBox.SetCollisionLayerValue(4, false);
+		HitBox.SetCollisionMaskValue(2, false);
+
+		HitBox.SetCollisionLayerValue(3, true);
+		HitBox.SetCollisionMaskValue(5, true);
+
+	}
 
 
 }

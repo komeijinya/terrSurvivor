@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c3tyro3cqf01b"]
+
+[ext_resource type="PackedScene" uid="uid://cvu2uxo3hscsj" path="res://scene/Skill/grenade_skill.tscn" id="1_i8dc3"]
+[ext_resource type="Script" uid="uid://b34psak83vdo2" path="res://upgrades/Ability.cs" id="2_pxa24"]
+
+[resource]
+script = ExtResource("2_pxa24")
+AbilityManagerScene = ExtResource("1_i8dc3")
+isSkill = true
+Id = "grenade_skill"
+Name = "手雷"
+Description = "Boom!"
+MaxQuantity = 1

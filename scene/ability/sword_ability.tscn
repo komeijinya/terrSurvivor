@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://hmr1flom6co6" path="res://scene/ability/SwordAbility.cs" id="1_xox0s"]
 [ext_resource type="PackedScene" uid="uid://bk2yh5quqvtsh" path="res://scene/game_object/sword/sword.tscn" id="2_pb6lv"]
 [ext_resource type="PackedScene" uid="uid://dsas7lm6215qt" path="res://scene/Component/shoot_component.tscn" id="3_iukf5"]
-[ext_resource type="PackedScene" uid="uid://bl4vwf13j3wlj" path="res://scene/game_object/projectiles/sword_projectile.tscn" id="4_jbcfs"]
+[ext_resource type="PackedScene" uid="uid://bl4vwf13j3wlj" path="res://sword_projectile.tscn" id="4_iukf5"]
 
 [node name="SwordAbility" type="Node2D"]
 script = ExtResource("1_xox0s")
@@ -14,6 +14,6 @@ BaseDamage = 20.0
 BaseScale = Vector2(1.6, 1.6)
 
 [node name="ShootComponent" parent="." instance=ExtResource("3_iukf5")]
-Projectile = ExtResource("4_jbcfs")
+Projectile = ExtResource("4_iukf5")
 
 [node name="Timer" type="Timer" parent="."]

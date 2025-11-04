@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://bn02pfok2s0yx"]
+[gd_scene load_steps=10 format=4 uid="uid://bn02pfok2s0yx"]
 
 [ext_resource type="PackedScene" uid="uid://7mk6cnw52jse" path="res://scene/game_object/player/player.tscn" id="1_at6b5"]
 [ext_resource type="TileSet" uid="uid://b0l10pbtlv7xt" path="res://resources/map.tres" id="1_hyorn"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://6ossckrchouk" path="res://scene/manager/game_time_manager.tscn" id="3_fif1j"]
 [ext_resource type="PackedScene" uid="uid://cvbfteltpvf2f" path="res://scene/manager/enemy_manager.tscn" id="3_om3bd"]
 [ext_resource type="PackedScene" uid="uid://pxjy00ayekfa" path="res://ui/left_time_screen.tscn" id="3_y73mg"]
+[ext_resource type="PackedScene" uid="uid://dbwhv7k1cd0wc" path="res://scene/game_object/TestEnemy/test_enemy.tscn" id="8_8c4di"]
+[ext_resource type="PackedScene" uid="uid://c3ya8myyqdggu" path="res://scene/game_object/Experience/experience.tscn" id="9_le8mt"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_syah5")
@@ -36,4 +38,29 @@ position = Vector2(-1, 2)
 
 [node name="Enemies" type="Node2D" parent="." groups=["Enemies"]]
 
+[node name="TestEnemy" parent="Enemies" instance=ExtResource("8_8c4di")]
+position = Vector2(557, 209)
+MaxHealth = 1.0
+
+[node name="TestEnemy2" parent="Enemies" instance=ExtResource("8_8c4di")]
+position = Vector2(560, 146)
+MaxHealth = 1.0
+
+[node name="TestEnemy3" parent="Enemies" instance=ExtResource("8_8c4di")]
+position = Vector2(559, 422)
+MaxHealth = 1.0
+
+[node name="TestEnemy4" parent="Enemies" instance=ExtResource("8_8c4di")]
+position = Vector2(558, 346)
+MaxHealth = 1.0
+
+[node name="TestEnemy5" parent="Enemies" instance=ExtResource("8_8c4di")]
+position = Vector2(558, 276)
+MaxHealth = 1.0
+
 [node name="Dorp" type="Node2D" parent="." groups=["Drop"]]
+
+[node name="Experience" parent="Dorp" instance=ExtResource("9_le8mt")]
+position = Vector2(394.99997, 291.99997)
+
+[node name="Particles" type="Node2D" parent="." groups=["Particles"]]

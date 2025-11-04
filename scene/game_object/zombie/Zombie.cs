@@ -31,16 +31,4 @@ public partial class Zombie : BasicEnemy
 
 
 
-	public void OnHurt()
-	{
-		
-	}
-
-	public void OnDied()
-	{
-		QueueFree();
-	}
-	
-
-
 }
